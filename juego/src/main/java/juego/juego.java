@@ -66,9 +66,10 @@ public class juego {
         return posiciones;
     }
 
-    public static String formarPalabra (char letra, String palabraGuiones, String palabra) {
+    public static String formarPalabra (char letra, String palabraGuiones, String palabra, int[] posiciones) {
+        int contadorPosiciones = 0;
         for (int i = 0; i < palabraGuiones.length(); i++) {
-            if (comprobarLetra(letra, palabra)) {
+            if (i == posiciones[contadorPosiciones]) {
                 
             }
         }
