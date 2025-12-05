@@ -62,8 +62,8 @@ public class juego {
         for (int i = 0; i < palabra.length(); i++) {
             if (palabra.charAt(i) == letra && !primero) {
                 Arrays.copyOf(posiciones, contadorPosiciones+1);
-                posiciones[contadorPosiciones] = i;
                 contadorPosiciones++;
+                posiciones[contadorPosiciones] = i;
             } else if (primero && palabra.charAt(i) == letra) {
                 posiciones[contadorPosiciones] = i;
                 contadorPosiciones++;
