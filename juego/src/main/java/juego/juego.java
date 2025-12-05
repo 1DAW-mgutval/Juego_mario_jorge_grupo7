@@ -6,42 +6,42 @@ public class juego {
     public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
+
         System.out.println("JUGADOR 1: la palabra que deseas adivinar");
         String palabra = sc.nextLine();
 
 
-        //repeat repite el guion segun la longitud de la palabra
-        String resultado = "_".repeat(palabra.length());
-
-        for (int i = 0; i < 6; i++) {
-            System.out.println("Palara:"+ resultado);
-
-            System.out.print("JUGADOR 2: Ingresa una letra: ");
-            char caracter_usuario = sc.next().charAt(0);
-            
-            comprobarLetra(caracter_usuario, palabra);
-            
-
+        char[] descubiertas = new char[palabra.length()];
+        for (int i = 0; i < descubiertas.length; i++) {
+            descubiertas[i] = '_';
         }
 
-        System.out.println("Felicidades! Has adivinado la palabra: Hola");
 
-    
-      
-    
+        //repeat repite el guion segun la longitud de la palabra
         
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        int intentos = 6;
+
+        while (intentos > 0) {
+            System.out.println("\nPalabra: " + String.valueOf(descubiertas));
+
+            System.out.print("JUGADOR 2: Ingresa una letra: ");
+            char letra = sc.next().toLowerCase().charAt(0);
+
+            // Si no está en la palabra → pierdo intento
+            if (!comprobarLetra(letra, palabra)) {
+                System.out.println("Fallaste! La letra no está.");
+                intentos--;
+            } else {
+                formarPalabra(letra, descubiertas, palabra);
+            }
+
+            if (palabraCompleta(descubiertas)) {
+                System.out.println("\n¡FELICIDADES! Has adivinado la palabra: " + palabra);
+                return;
+            }
+        }
+
+        System.out.println("\nTe quedaste sin intentos. La palabra era: " + palabra);
     }
 
     public static boolean comprobarLetra (char letra, String palabra) {
