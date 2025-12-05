@@ -6,7 +6,6 @@ public class juego {
     public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-
         System.out.println("JUGADOR 1: la palabra que deseas adivinar");
         String palabra = sc.nextLine();
 
@@ -31,6 +30,10 @@ public class juego {
       
     
         
+    
+    
+    
+    
     
     
     
@@ -66,12 +69,32 @@ public class juego {
         return posiciones;
     }
 
-    public static String formarPalabra (char letra, String palabraGuiones, String palabra, int[] posiciones) {
+    public static void formarPalabra (char letra, String palabra, char[] palabraGuiones, int[] posiciones) {
         int contadorPosiciones = 0;
-        for (int i = 0; i < palabraGuiones.length(); i++) {
+        for (int i = 0; i < palabraGuiones.length; i++) {
             if (i == posiciones[contadorPosiciones]) {
-                
+                palabraGuiones[i] = letra;
             }
         }
+    }
+
+    public static void pintarPalabraGuiones (char[] palabraGuiones) {
+        for (int i = 0; i < palabraGuiones.length; i++) {
+            System.out.print(palabraGuiones[i]);
+        }
+        System.out.println();
+    }
+
+    public static boolean palabraCompleta (String palabra, char[] palabraGuiones) {
+        int coincidencias = 0;
+        for (int i = 0; i < palabra.length(); i++) {
+            if (palabra.charAt(i) == palabraGuiones[i]) {
+                coincidencias++;
+            }
+        }
+        if (coincidencias == palabra.length()) {
+            return true;
+        }
+        return false;
     }
 }
