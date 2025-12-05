@@ -20,22 +20,25 @@ public class juego {
         //repeat repite el guion segun la longitud de la palabra
         
         int intentos = 6;
+        int posiciones[] = new int[1];
 
-        while (intentos > 0) {
+        while (intentos > 0 && !palabraCompleta(palabra, descubiertas)) {
             System.out.println("\nPalabra: " + String.valueOf(descubiertas));
 
             System.out.print("JUGADOR 2: Ingresa una letra: ");
             char letra = sc.next().toLowerCase().charAt(0);
 
-            // Si no está en la palabra → pierdo intento
+            // Si no está en la palabra -> pierdo intento
             if (!comprobarLetra(letra, palabra)) {
-                System.out.println("Fallaste! La letra no está.");
                 intentos--;
+                System.out.println("Letra incorrecta. Te quedan " + intentos + " intentos");
             } else {
-                formarPalabra(letra, descubiertas, palabra);
+                System.out.println("Letra acertada!!");
+                posicionesLetra(letra, palabra, posiciones);
+                formarPalabra(letra, palabra, descubiertas, posiciones);
             }
 
-            if (palabraCompleta(descubiertas)) {
+            if (palabraCompleta(palabra, descubiertas)) {
                 System.out.println("\n¡FELICIDADES! Has adivinado la palabra: " + palabra);
                 return;
             }
@@ -53,20 +56,20 @@ public class juego {
         return false;
     }
 
-    public static int[] posicionesLetra (char letra, String palabra) {
-        int posiciones[] = new int[1];
+    public static void posicionesLetra (char letra, String palabra, int posiciones[]) {
         int contadorPosiciones = 0;
         boolean primero = true;
         for (int i = 0; i < palabra.length(); i++) {
             if (palabra.charAt(i) == letra && !primero) {
                 Arrays.copyOf(posiciones, contadorPosiciones+1);
                 posiciones[contadorPosiciones] = i;
+                contadorPosiciones++;
             } else if (primero && palabra.charAt(i) == letra) {
                 posiciones[contadorPosiciones] = i;
                 contadorPosiciones++;
+                primero = false;
             }
         }
-        return posiciones;
     }
 
     public static void formarPalabra (char letra, String palabra, char[] palabraGuiones, int[] posiciones) {
